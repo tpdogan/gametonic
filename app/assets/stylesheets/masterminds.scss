@@ -1,0 +1,81 @@
+// Mastermind classes
+.mastermind__plate {
+  width: 300px;
+  min-width: 300px;
+  min-height: 600px;
+  height: 600px;
+  background-color: brown;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  align-content: space-between;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+}
+.mastermind__cell {
+  width: 100%;
+  height: 40px;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  user-select: none;
+  position: relative;
+}
+.mastermind__ball {
+  width: 30px;
+  height: 100%;
+  background-color: #d8ccbb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mastermind__ball:hover {
+  border: 2px solid #e0bd8b;
+}
+.mastermind--color-0 {
+  background-color: #d8ccbb;
+}
+.mastermind--color-1 {
+  background-color: #a9e34b;
+  border: 2px solid #81ad39;
+}
+.mastermind--color-2 {
+  background-color: #3bc9db;
+  border: 2px solid #2b97a5;
+}
+.mastermind--color-3 {
+  background-color: #ff9e0d;
+  border: 2px solid #ad6c09;
+}
+.mastermind--color-4 {
+  background-color: #da77f2;
+  border: 2px solid #924ea3;
+}
+.mastermind--color-5 {
+  background-color: #8D6E63;
+  border: 2px solid #52403a;
+}
+.mastermind--color-6 {
+  background-color: #c92a2a;
+  border: 2px solid #771818;
+}
+.mastermind--color-7 {
+  background-color: #5f3dc4;
+  border: 2px solid #3c267e;
+}
+.mastermind--color-8 {
+  background-color: #000000;
+  border: 2px solid #ffffff;
+}
+.mastermind__submit {
+  right: 5px;
+  position: absolute;
+  height: 30px;
+  width: 80px;
+}

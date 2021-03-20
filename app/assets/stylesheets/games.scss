@@ -1,0 +1,83 @@
+.games__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,300px);
+  justify-content: space-around;
+  grid-gap: 30px;
+}
+.game__card {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  .button {
+    transition: 0.3s;
+  }
+  .game__name {
+    background-color: white;
+    color: #333;
+    position: absolute;
+    z-index: 1;
+    width: 50%;
+    left: 25%;
+    height: 20%;
+    top: 40%;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+  }
+}
+.game__card:nth-child(3n+2) {
+  margin: 0 auto;
+}
+.game__card:hover {
+  .button {
+    transform: scale(1.25);
+    cursor: pointer;
+  }
+}
+.game__buttons {
+  display: flex;
+  padding: 5px;
+  background-color: #e8c3c3;
+  border-radius: 5px;
+  margin-top: 10px;
+  .button {
+    background-color: antiquewhite !important;
+    border: 2px solid brown !important;
+    transition: 0.3s;
+  }
+  .button:hover {
+    background-color: orange !important;
+  }
+}
+.game__status {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #333333d4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 30px;
+  animation: slide-in-top 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

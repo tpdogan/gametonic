@@ -1,0 +1,48 @@
+.user__plate {
+  background-color: brown;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+}
+.user__plate-title {
+  background-color: antiquewhite;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 2px;
+  font-weight: 900;
+}
+.user__plate-list {
+  background-color: antiquewhite;
+  border-radius: 2px;
+  padding: 0.5rem;
+  width: 100%;
+  li {
+    text-align: left;
+    padding-left: 1rem;
+    margin-left: 2rem;
+    p {
+      display: inline;
+    }
+  }
+  li:not(:last-child) {
+    padding-bottom: 0.5rem;
+  }
+}
+.user__form {
+  position: absolute;
+  left: 0;
+  top: 75%;
+  z-index: 1001;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background-color: transparent !important;
+  input[type=text] {
+    border-radius: 2px 0 0 2px;
+  }
+  input[type=submit] {
+    border-radius: 0 2px 2px 0;
+    height: 100%;
+  }
+}

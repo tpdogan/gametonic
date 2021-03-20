@@ -1,0 +1,81 @@
+// Hangman classes
+.hangman__plate {
+  width: 300px;
+  min-width: 300px;
+  min-height: 450px;
+  height: 450px;
+  background-color: brown;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.hangman__man {
+  width: 120px;
+  height: 170px;
+  margin-bottom: 40px;
+  position: relative;
+  div {
+    background-color: antiquewhite;
+    position: absolute;
+  }
+  .hangman__cover {
+    width: 60px;
+    height: 40px;
+    right: 10px;
+    background-color: brown;
+    z-index: 1;
+  }
+  .hangman__cover:last-child {
+    bottom: 10px !important;
+  }
+}
+.hangman__cell {
+  top: 200px;
+  width: 100%;
+  left: 0;
+  background-color: inherit;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.hangman__alphabet {
+  width: 205px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  left: 45px;
+  bottom: 25px;
+  padding: 5px;
+  background-color: antiquewhite;
+  position: absolute;
+  div {
+    background-color: #dc9d9d;
+    cursor: pointer;
+    margin-top: 2px;
+    color: #333;
+    font-weight: 400;
+  }
+}
+.hangman__alphabet div:hover {
+  background-color: orange;
+}
+.hangman__selected {
+  background-color: black !important;
+}
+.hangman__letter {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  color: #9d62a0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  margin-left: 2px;
+  font-size: 16px;
+  font-weight: 900;
+}

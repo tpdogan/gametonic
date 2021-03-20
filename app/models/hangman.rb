@@ -1,0 +1,2 @@
+class Hangman < ApplicationRecord
+end

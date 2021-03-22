@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { changeBoard, resetBoard, submitBoard } from '../actions/play_actions'
-import { setGame } from '../actions/user_actions'
+import { setGame, setGamePath, setPoints } from '../actions/game_actions'
 import Users from './users'
 import Userform from './user_form'
 
@@ -13,6 +13,7 @@ class Memorycard extends Component {
   }
 
   componentDidMount() {
+    this.props.setGamePath('memorycards')
     this.props.resetBoard('memorycards')
   }
 
@@ -36,6 +37,7 @@ class Memorycard extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Memory Card')
+    this.props.setPoints(this.props.points)
     
     const gameBoard = this.props.board.map((cell, index) => {
       return (
@@ -46,7 +48,7 @@ class Memorycard extends Component {
     })
     
     const result = this.props.winner == 1 ? 
-      <div className='game__status'>You have won!<Userform /></div> :
+      <div className='game__status'>You have won {this.props.points} point(s)!<Userform /></div> :
       <div className='game__status'>You have lost!</div>
 
     return (
@@ -75,8 +77,12 @@ function mapState(state) {
     authenticity_token: state.memorycard.authenticity_token,
     board: state.memorycard.board,
     id: state.memorycard.id,
-    winner: state.memorycard.winner
+    points: state.mastermind.points,
+    winner: state.memorycard.winner,
+
+    game: state.games.game,
+    gamePath: state.games.gamePath
   }
 }
 
-export default connect(mapState, { changeBoard, resetBoard, setGame, submitBoard })(Memorycard)
+export default connect(mapState, { changeBoard, resetBoard, setGame, setGamePath, setPoints, submitBoard })(Memorycard)

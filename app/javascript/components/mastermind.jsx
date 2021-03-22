@@ -74,7 +74,7 @@ class Mastermind extends Component {
           </div>
       )
       return (
-        <div key={cell + index} className='mastermind__cell' id={index}>
+        <div key={cell + index} className='mastermind__cell' id={index} style={index == 12 ? {zIndex: '1001'} : {}}>
           {balls}
           <button
             className={(this.props.status.round != index || this.props.winner) ? 'hidden' : 'mastermind__submit'}

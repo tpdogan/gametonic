@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { changeBoard, resetBoard, submitBoard } from '../actions/play_actions'
-import { setGame } from '../actions/user_actions'
+import { setGame, setGamePath, setPoints } from '../actions/game_actions'
 import Users from './users'
-import hanger from '../vanilla/hanger'
 import Userform from './user_form'
+import hanger from '../vanilla/hanger'
 
 class Hangman extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class Hangman extends Component {
 
   componentDidMount() {
     hanger()
+    this.props.setGamePath('hangmen')
     this.props.resetBoard('hangmen')
   }
 
@@ -67,6 +68,7 @@ class Hangman extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Hangman')
+    this.props.setPoints(this.props.points)
 
     const gameBoard = this.props.board.map((letter, index) => {
       return (
@@ -104,7 +106,7 @@ class Hangman extends Component {
 
     const winner = this.props.winner
     const result = winner === -1 ? <div className='game__status'>You have lost!</div> :
-                   winner === 1 ? <div className='game__status'>You have won!<Userform /></div> : ''
+                   winner === 1 ? <div className='game__status'>You have won {this.props.points} point(s)!<Userform /></div> : ''
 
     return (
       <div className='section is-flex is-full-width is-justify-content-space-around'>
@@ -135,9 +137,13 @@ function mapState(state) {
     board: state.hangman.board,
     id: state.hangman.id,
     letters: state.hangman.status.letters,
+    points: state.hangman.points,
     wrongs: state.hangman.status.wrongs,
-    winner: state.hangman.winner
+    winner: state.hangman.winner,
+
+    game: state.games.game,
+    gamePath: state.games.gamePath
   }
 }
 
-export default connect(mapState, { changeBoard, resetBoard, setGame, submitBoard })(Hangman)
+export default connect(mapState, { changeBoard, resetBoard, setGame, setGamePath, setPoints, submitBoard })(Hangman)

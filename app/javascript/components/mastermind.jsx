@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { changeBoard, resetBoard, submitBoard } from '../actions/play_actions'
-import { setGame } from '../actions/user_actions'
+import { setGame, setGamePath, setPoints } from '../actions/game_actions'
 import Users from './users'
 import Userform from './user_form'
 
@@ -17,6 +17,7 @@ class Mastermind extends Component {
   }
 
   componentDidMount() {
+    this.props.setGamePath('masterminds')
     this.props.resetBoard('masterminds')
   }
 
@@ -59,6 +60,7 @@ class Mastermind extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Mastermind')
+    this.props.setPoints(this.props.points)
     
     const gameBoard = this.props.board.map((cell, index) => {
       const balls = cell.split('').map(
@@ -78,15 +80,19 @@ class Mastermind extends Component {
             className={(this.props.status.round != index || this.props.winner) ? 'hidden' : 'mastermind__submit'}
             onClick={this.props.status.round != index ? () => {return false} : this.checkSubmit}>
             Submit
-          </button> 
-          <div className="mastermind__ball">{this.props.status.colorPlace && this.props.status.colorPlace[index][0]}</div>
-          <div className="mastermind__ball">{this.props.status.colorPlace && this.props.status.colorPlace[index][1]}</div>
+          </button>
+          <div className="mastermind__ball">
+            {this.props.status.colorPlace && this.props.status.colorPlace[index] && this.props.status.colorPlace[index][0]}
+          </div>
+          <div className="mastermind__ball">
+            {this.props.status.colorPlace && this.props.status.colorPlace[index] && this.props.status.colorPlace[index][1]}
+          </div>
         </div>
       )
     })
     
     const result = this.props.winner == 1 ? 
-      <div className='game__status'>You have won!<Userform /></div> :
+      <div className='game__status'>You have won {this.props.points} point(s)!<Userform /></div> :
       <div className='game__status'>You have lost!</div>
 
     return (
@@ -114,11 +120,16 @@ class Mastermind extends Component {
 function mapState(state) {
   return {
     authenticity_token: state.mastermind.authenticity_token,
+    answer: state.mastermind.status.answer,
     board: state.mastermind.board,
     id: state.mastermind.id,
+    points: state.mastermind.points,
     status: state.mastermind.status,
-    winner: state.mastermind.winner
+    winner: state.mastermind.winner,
+
+    game: state.games.game,
+    gamePath: state.games.gamePath
   }
 }
 
-export default connect(mapState, { changeBoard, resetBoard, setGame, submitBoard })(Mastermind)
+export default connect(mapState, { changeBoard, resetBoard, setGame, setGamePath, setPoints, submitBoard })(Mastermind)

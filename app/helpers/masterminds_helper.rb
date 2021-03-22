@@ -26,7 +26,14 @@ module MastermindsHelper
     }
 
     state[:status][:round] = state[:board].index('0000')
-    cell = state[:board].index('0000') ? state[:board].index('0000') - 1 : state[:board].length - 1
+    if !state[:status][:round]
+      state[:winner] = -1
+      state[:status][:round] = 12
+      state[:status][:colorPlace] = state[:status][:colorPlace] + ['44']
+      state[:board] = state[:board] + [mm.code]
+    end
+
+    cell = state[:status][:round] - 1
 
     if cell != -1
       state[:board][cell].split('').each_with_index do |num, index|
@@ -42,7 +49,7 @@ module MastermindsHelper
 
       if state[:status][:colorPlace][cell] == '44'
         state[:winner] = 1
-        state[:points] = 12 - state[:status][:round]
+        state[:points] = 13 - state[:status][:round]
       end
     end
 

@@ -8,8 +8,7 @@ class UserForm extends Component {
     super(props)
 
     this.state = {
-      username: '',
-      password: ''
+      username: ''
     }
 
     this.onChange = this.onChange.bind(this)
@@ -30,8 +29,7 @@ class UserForm extends Component {
     const userData = {
       authenticity_token: this.props.authenticity_token,
       user: {
-        username: this.state.username,
-        password: this.state.password
+        username: this.state.username
       },
       game: {
         name: this.props.game,

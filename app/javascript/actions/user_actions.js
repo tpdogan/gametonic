@@ -1,4 +1,4 @@
-import { CREATE_USER, FETCH_USERS, NEW_USER, SET_GAME } from "./types"
+import { CREATE_USER, FETCH_USERS, NEW_USER } from "./types"
 
 export const createUser = (userData) => dispatch => {
   fetch(

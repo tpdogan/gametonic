@@ -12,7 +12,7 @@ const initialState = {
   board: [],
   id: '',
   points: 0,
-  status: '',
+  status: {},
   winner: 0
 }
 

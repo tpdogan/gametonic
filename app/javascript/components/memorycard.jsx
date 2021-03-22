@@ -49,13 +49,13 @@ class Memorycard extends Component {
     const gameBoard = this.props.board.map((cell, index) => {
       return (
         <div key={index} className='memorycard__cell' id={index} onClick={this.selectCell}>
-          { cell == '?' ? cell : <i className={`fal fa-${cell}`}></i> }
+          { cell === '?' ? cell : <i className={`fal fa-${cell}`}></i> }
         </div>
       )
     })
     
     // Depending on the winner status the result differs to show the points and the user form to save username
-    const result = this.props.winner == 1 ? 
+    const result = this.props.winner === 1 ? 
       <div className='game__status'>
         <p>You have won</p>
         <p>{this.props.points} point(s)!</p>
@@ -68,7 +68,7 @@ class Memorycard extends Component {
         <div className='block m-0'>
           <div className='memorycard__plate'>
             {gameBoard}
-            {this.props.winner == 1 && result}
+            {this.props.winner !== 0 && result}
           </div>
 
           <div className='game__buttons'>

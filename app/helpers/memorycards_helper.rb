@@ -41,9 +41,6 @@ module MemorycardsHelper
       board: [],
       id: mc.id,
       points: 0,
-      status: {
-        clicks: mc.clicks,
-      },
       winner: 0
     }
 
@@ -77,6 +74,11 @@ module MemorycardsHelper
     if state[:board].count('?') === 0
       state[:winner] = 1
       state[:points] = 40 - mc.clicks
+    end
+
+    if mc.clicks > 40
+      state[:winner] = -1
+      state[:points] = 0
     end
 
     # Return state

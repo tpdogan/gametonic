@@ -92,7 +92,11 @@ class Mastermind extends Component {
     })
     
     const result = this.props.winner == 1 ? 
-      <div className='game__status'>You have won {this.props.points} point(s)!<Userform /></div> :
+      <div className='game__status'>
+        <p>You have won</p>
+        <p>{this.props.points} point(s)!</p>
+        <Userform />
+      </div> :
       <div className='game__status'>You have lost!</div>
 
     return (

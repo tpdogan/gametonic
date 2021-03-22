@@ -63,7 +63,8 @@ class TicTacToe extends Component {
     const result =
       this.props.winner === -1 ?
         <div className='game__status'>
-          You have won!
+          <p>You have won.</p>
+          <p>{this.props.points} point(s)!</p>
           <Userform />
         </div> :
       this.props.winner === 1 ?

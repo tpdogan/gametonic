@@ -48,7 +48,7 @@ module TictactoesHelper
 
     state[:status][:perform] = perform if perform
     state[:winner] = winner if winner
-    state[:points] = 1 if winner
+    state[:points] = state[:board].count('0') if winner
 
     return state
   end

@@ -49,7 +49,7 @@ module MastermindsHelper
 
       if state[:status][:colorPlace][cell] == '44'
         state[:winner] = 1
-        state[:points] = 13 - state[:status][:round]
+        state[:points] = 4*(13 - state[:status][:round])
       end
     end
 

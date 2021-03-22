@@ -5,7 +5,7 @@ module HangmenHelper
     
     random = rand(totalLines)
     word = open(filename,'r').readlines[random]
-    word = word[0..word.length-2]
+    word = word[0..word.length-2].downcase
   end
 
   def gameStatus(hm)
@@ -36,7 +36,7 @@ module HangmenHelper
     state[:status][:letters] = letters
     if word === guess
       state[:winner] = 1
-      state[:points] = 8 - state[:status][:wrongs]
+      state[:points] = (8 - state[:status][:wrongs]) ** 2
     elsif state[:status][:wrongs] > 7
       state[:winner] = -1
       state[:board] = word

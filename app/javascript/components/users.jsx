@@ -29,7 +29,7 @@ class Users extends Component {
 
 function mapState(state) {
   return {
-    game: state.users.game,
+    game: state.games.game,
     users: state.users.users
   }
 }

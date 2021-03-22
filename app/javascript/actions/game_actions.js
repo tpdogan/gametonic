@@ -1,4 +1,4 @@
-import { FETCH_GAMES } from "./types"
+import { FETCH_GAMES, SET_GAME, SET_GAME_PATH, SET_GAME_POINTS } from "./types"
 
 export const fetchGames = () => dispatch => {
   fetch('api/games')
@@ -11,4 +11,31 @@ export const fetchGames = () => dispatch => {
         }
       )
     })
+}
+
+export const setGame = (game) => dispatch => {
+  dispatch(
+    {
+      type: SET_GAME,
+      payload: game
+    }
+  )
+}
+
+export const setGamePath = (gamePath) => dispatch => {
+  dispatch(
+    {
+      type: SET_GAME_PATH,
+      payload: gamePath
+    }
+  )
+}
+
+export const setPoints = (points) => dispatch => {
+  dispatch(
+    {
+      type: SET_GAME_POINTS,
+      payload: points
+    }
+  )
 }

@@ -1,7 +1,10 @@
-import { FETCH_GAMES } from "../actions/types"
+import { FETCH_GAMES, SET_GAME, SET_GAME_PATH, SET_GAME_POINTS } from "../actions/types"
 
 const initialState = {
-  games: []
+  game: '',
+  gamePath: '',
+  games: [],
+  points: 0
 }
 
 function gameReducer(state = initialState, action) {
@@ -10,6 +13,21 @@ function gameReducer(state = initialState, action) {
       return {
         ...state,
         games: action.payload
+      }
+    case SET_GAME:
+      return {
+        ...state,
+        game: action.payload
+      }
+    case SET_GAME_PATH:
+      return {
+        ...state,
+        gamePath: action.payload
+      }
+    case SET_GAME_POINTS:
+      return {
+        ...state,
+        points: action.payload
       }
     default:
       return state

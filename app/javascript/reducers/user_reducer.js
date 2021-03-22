@@ -1,4 +1,4 @@
-import { CREATE_USER, FETCH_USERS, NEW_USER, SET_GAME } from "../actions/types"
+import { CREATE_USER, FETCH_USERS, NEW_USER } from "../actions/types"
 
 const initialState = {
   authenticity_token: '',
@@ -23,11 +23,6 @@ function userReducer(state = initialState, action){
       return {
         ...state,
         authenticity_token: action.payload
-      }
-    case SET_GAME:
-      return {
-        ...state,
-        game: action.payload
       }
     default:
       return state

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createUser, newUser } from '../actions/user_actions'
+import { resetBoard } from '../actions/play_actions'
+import { createUser, fetchUsers, newUser } from '../actions/user_actions'
 
 class UserForm extends Component {
   constructor(props) {
@@ -33,12 +34,18 @@ class UserForm extends Component {
         password: this.state.password
       },
       game: {
-        name: this.props.game_name,
-        points: this.props.game_points
+        name: this.props.game,
+        points: this.props.points
       }
     }
 
     this.props.createUser(userData)
+    this.props.resetBoard(this.props.gamePath)
+
+    // This part should/could be improved with action cable
+    setTimeout(() => {
+      this.props.fetchUsers(this.props.game)
+    }, 1000);
   }
 
   componentDidMount() {
@@ -57,9 +64,14 @@ class UserForm extends Component {
 
 function mapState(state) {
   return {
+    game: state.games.game,
+    gamePath: state.games.gamePath,
+
     authenticity_token: state.users.authenticity_token,
-    newUser: state.users.newUser
+    newUser: state.users.newUser,
+
+    points: state.games.points
   }
 }
 
-export default connect(mapState, { createUser, newUser })(UserForm)
+export default connect(mapState, { createUser, fetchUsers, newUser, resetBoard })(UserForm)

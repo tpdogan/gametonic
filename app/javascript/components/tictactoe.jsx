@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { changeBoard, resetBoard, submitBoard } from '../actions/play_actions'
-import { setGame } from '../actions/user_actions'
+import { setGame, setGamePath, setPoints } from '../actions/game_actions'
 import Users from './users'
 import Userform from './user_form'
 
@@ -13,6 +13,7 @@ class TicTacToe extends Component {
   }
 
   componentDidMount() {
+    this.props.setGamePath('tictactoes')
     this.props.resetBoard('tictactoes')
   }
 
@@ -34,7 +35,7 @@ class TicTacToe extends Component {
           index: cellNo
         }
       }
-      this.props.submitBoard('tictactoes', boardData)
+      this.props.submitBoard(this.props.gamePath, boardData)
     } else {
       console.log('cannot play')
     }
@@ -43,6 +44,7 @@ class TicTacToe extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Tic Tac Toe')
+    this.props.setPoints(this.props.points)
     
     const gameBoard = this.props.board.map((cell, index) => {
       return (
@@ -60,7 +62,10 @@ class TicTacToe extends Component {
 
     const result =
       this.props.winner === -1 ?
-        <div className='game__status'>You have won!<Userform game_name={'Tic Tac Toe'} game_points={this.props.points} /></div> :
+        <div className='game__status'>
+          You have won!
+          <Userform />
+        </div> :
       this.props.winner === 1 ?
         <div className='game__status'>You have lost!</div> :
         <div className='game__status'>It is draw!</div>
@@ -74,7 +79,7 @@ class TicTacToe extends Component {
           </div>
 
           <div className='game__buttons'>
-            <button className='button is-half-width mr-2' onClick={() => this.props.resetBoard('tictactoes')}>Reset Board</button>
+            <button className='button is-half-width mr-2' onClick={() => this.props.resetBoard(this.props.gamePath)}>Reset Board</button>
             <Link to='/' className='button is-half-width'>All games</Link>
           </div>
         </div>
@@ -93,8 +98,11 @@ function mapState(state) {
     id: state.tictactoe.id,
     perform: state.tictactoe.status.perform,
     points: state.tictactoe.points,
-    winner: state.tictactoe.winner
+    winner: state.tictactoe.winner,
+
+    game: state.games.game,
+    gamePath: state.games.gamePath
   }
 }
 
-export default connect(mapState, { changeBoard, resetBoard, setGame, submitBoard })(TicTacToe)
+export default connect(mapState, { changeBoard, resetBoard, setGame, setGamePath, setPoints, submitBoard })(TicTacToe)

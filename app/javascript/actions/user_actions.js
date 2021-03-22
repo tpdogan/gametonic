@@ -47,12 +47,3 @@ export const newUser = () => dispatch => {
       )
     })
 }
-
-export const setGame = (game) => dispatch => {
-  dispatch(
-    {
-      type: SET_GAME,
-      payload: game
-    }
-  )
-}

@@ -1,3 +1,4 @@
+// This function adds div elements that form a shape for hanged man
 function hanger() {
   const man = document.getElementsByClassName('hangman__man')[0]
 

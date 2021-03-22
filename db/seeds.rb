@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Each games is seeded
 Game.create(:name => 'Tic Tac Toe', :image => 'assets/xox.jpg')
 Game.create(:name => 'Mastermind', :image => 'assets/mastermind.jpg')
 Game.create(:name => 'Hangman', :image => 'assets/hangman.jpg')

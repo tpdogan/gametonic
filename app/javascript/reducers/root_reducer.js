@@ -3,6 +3,7 @@ import gameReducer from "./game_reducer";
 import playReducer from "./play_reducer";
 import userReducer from "./user_reducer";
 
+// All reducers are combined at root
 const rootReducer = combineReducers(
   {
     games: gameReducer,

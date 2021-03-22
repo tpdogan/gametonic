@@ -7,6 +7,7 @@ import {
   SET_WINNER
 } from "../actions/types"
 
+// Initial state necessary for all moves during game
 const initialState = {
   authenticity_token: '',
   board: [],
@@ -16,6 +17,7 @@ const initialState = {
   winner: 0
 }
 
+// Reducer function
 function playReducer(state = initialState, action) {
   switch (action.type) {
     case SET_AUTH_TOKEN:

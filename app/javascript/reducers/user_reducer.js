@@ -1,5 +1,6 @@
 import { CREATE_USER, FETCH_USERS, NEW_USER } from "../actions/types"
 
+// Initial state necessary to fetch users or create a new user
 const initialState = {
   authenticity_token: '',
   game: '',
@@ -7,6 +8,7 @@ const initialState = {
   users: []
 }
 
+// Reducer function
 function userReducer(state = initialState, action){
   switch (action.type) {
     case CREATE_USER:

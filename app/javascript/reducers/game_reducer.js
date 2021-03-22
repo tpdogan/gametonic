@@ -1,5 +1,6 @@
 import { FETCH_GAMES, SET_GAME, SET_GAME_PATH, SET_GAME_POINTS } from "../actions/types"
 
+// Initial state necessary for all games
 const initialState = {
   game: '',
   gamePath: '',
@@ -7,6 +8,7 @@ const initialState = {
   points: 0
 }
 
+// Reducer function
 function gameReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_GAMES:

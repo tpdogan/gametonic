@@ -6,6 +6,7 @@ const initialState = {}
 
 const middleWare = [thunk]
 
+// The store with initial state and thunk middleware is created
 const store = createStore(
   rootReducer,
   initialState,

@@ -5,9 +5,8 @@ import Hangman from '../components/hangman'
 import Mastermind from '../components/mastermind'
 import Memorycard from '../components/memorycard'
 import TicTacToe from '../components/tictactoe'
-/*import Users from '../components/users'
-import UserForm from '../components/user_form'*/
 
+// Complete app with router
 class App extends Component {
   render() {
     return (

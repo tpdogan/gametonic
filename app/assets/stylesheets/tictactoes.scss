@@ -1,4 +1,5 @@
 // Tictactoe classes
+// General tictactoe plate
 .tictactoe__plate {
   width: 300px;
   min-width: 300px;
@@ -14,6 +15,7 @@
   position: relative;
   overflow: hidden;
 }
+// Cell for components
 .tictactoe__cell {
   width: 90px;
   height: 90px;

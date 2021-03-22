@@ -1,4 +1,5 @@
 // Hangman classes
+// General plate to hold game
 .hangman__plate {
   width: 300px;
   min-width: 300px;
@@ -12,6 +13,7 @@
   align-items: center;
   position: relative;
 }
+// The man drawing
 .hangman__man {
   width: 120px;
   height: 170px;
@@ -21,6 +23,7 @@
     background-color: antiquewhite;
     position: absolute;
   }
+  // Cover that opens in time
   .hangman__cover {
     width: 60px;
     height: 40px;
@@ -32,6 +35,7 @@
     bottom: 10px !important;
   }
 }
+// Cell for partial components
 .hangman__cell {
   top: 200px;
   width: 100%;
@@ -41,6 +45,7 @@
   justify-content: center;
   margin-top: 10px;
 }
+// Box to hold alphabet
 .hangman__alphabet {
   width: 205px;
   border-radius: 2px;
@@ -63,6 +68,7 @@
 .hangman__alphabet div:hover {
   background-color: orange;
 }
+// Selected letter change
 .hangman__selected {
   background-color: black !important;
 }

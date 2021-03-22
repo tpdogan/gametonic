@@ -1,4 +1,5 @@
 // Memorycard classes
+// General plate to hold game
 .memorycard__plate {
   width: 360px;
   min-width: 360px;
@@ -13,6 +14,7 @@
   border-radius: 5px;
   position: relative;
 }
+// Cell for components
 .memorycard__cell {
   width: 80px;
   height: 80px;

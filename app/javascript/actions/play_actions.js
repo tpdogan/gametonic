@@ -7,6 +7,7 @@ import {
   SET_WINNER
 } from "./types"
 
+// Change the board with a given one
 export const changeBoard = (board) => dispatch => {
   dispatch({
     type: SET_BOARD,
@@ -14,8 +15,9 @@ export const changeBoard = (board) => dispatch => {
   })
 }
 
-export const resetBoard = (game) => dispatch => {
-  fetch(`api/${game}/new`)
+// Reset the board by requesting a new game
+export const resetBoard = (gamePath) => dispatch => {
+  fetch(`api/${gamePath}/new`)
     .then(response => response.json())
     .then(data => {
       dispatch({
@@ -41,9 +43,10 @@ export const resetBoard = (game) => dispatch => {
     })
 }
 
-export const submitBoard = (game, boardData) => dispatch => {
+// Submit the board after play
+export const submitBoard = (gamePath, boardData) => dispatch => {
   fetch(
-    `api/${game}/${boardData.id}`,
+    `api/${gamePath}/${boardData.id}`,
     {
       method: 'PATCH',
       headers: {

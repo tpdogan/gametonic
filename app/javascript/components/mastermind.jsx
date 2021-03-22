@@ -7,30 +7,33 @@ import Users from './users'
 import Userform from './user_form'
 
 class Mastermind extends Component {
+  // Constructor and changeColor, checkSubmit functions
   constructor(props) {
     super(props)
-    this.state = {
-      guess: [0,0,0,0]
-    }
     this.changeColor = this.changeColor.bind(this)
     this.checkSubmit = this.checkSubmit.bind(this)
   }
 
+  // Set game path to plural for rails
+  // Request a new game from rails index
   componentDidMount() {
     this.props.setGamePath('masterminds')
     this.props.resetBoard('masterminds')
   }
 
+  // Update the form at each color change / click
   changeColor(event) {
     event.preventDefault()
+    // Get the current color from id
     const index = Number(event.target.id)
+    // Check which mouse button is clicked
     const direction = event.button == 0 ? 1 : -1
 
     // Gather necessary states
     const board = this.props.board.map(item => item)
     const round = this.props.status.round
 
-    // Change the ball number and submit for state update
+    // Change the ball number/color and submit for state update
     let balls = board[round]
     let newBall = Number(balls[index]) + direction
     newBall = newBall < 0 ? 8 : newBall > 8 ? 0 : newBall
@@ -39,12 +42,17 @@ class Mastermind extends Component {
     this.props.changeBoard(board)
   }
 
+  // Check if all balls are colored differently and submit
   checkSubmit() {
+    // Get the current balls
     const balls = this.props.board[this.props.status.round]
+    // Check if all balls are not colored
     if (balls.includes('0')) {
       alert('Please color all balls.')
+      // Check if all colors are not different
     } else if ([...new Set(balls.split(''))].length != 4) {
       alert('Please submit 4 different colors.')
+      // Submit the data for other cases
     } else {
       const boardData = {
         authenticity_token: this.props.authenticity_token,
@@ -60,9 +68,13 @@ class Mastermind extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Mastermind')
+    // Check points at each render for winning situation
     this.props.setPoints(this.props.points)
     
+    // Game board re-rendered when the board us updated at rails
+    // This is to prevent tampers
     const gameBoard = this.props.board.map((cell, index) => {
+      // First set balls for each round
       const balls = cell.split('').map(
         (item, index) =>
           <div 
@@ -73,6 +85,8 @@ class Mastermind extends Component {
             onContextMenu={this.props.winner ? () => {return false} : this.changeColor}>
           </div>
       )
+
+      // Second add alls to the full stack
       return (
         <div key={cell + index} className='mastermind__cell' id={index} style={index == 12 ? {zIndex: '1001'} : {}}>
           {balls}
@@ -91,6 +105,7 @@ class Mastermind extends Component {
       )
     })
     
+    // Depending on the winner status the result differs to show the points and the user form to save username
     const result = this.props.winner == 1 ? 
       <div className='game__status'>
         <p>You have won</p>
@@ -121,6 +136,7 @@ class Mastermind extends Component {
   }
 }
 
+// Redux is used to save all necessary state elements
 function mapState(state) {
   return {
     authenticity_token: state.mastermind.authenticity_token,

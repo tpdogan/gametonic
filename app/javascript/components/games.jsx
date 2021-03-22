@@ -4,15 +4,19 @@ import { fetchGames } from '../actions/game_actions'
 import GameCard from './game_card'
 
 class Games extends Component {
+  // Constructor and checkForRedirect functions
   constructor(props) {
     super(props)
     this.checkForRedirect = this.checkForRedirect.bind(this)
   }
 
+  // Fetch all of the games
   componentDidMount() {
     this.props.fetchGames()
   }
 
+  // When refresh is clicked the route is send as a parameter
+  // This functions checks if such redirect has occured
   checkForRedirect() {
     this.props.location.search != '' ?
       this.props.history.push(
@@ -20,6 +24,7 @@ class Games extends Component {
       ) : ''
   }
 
+  // All games are rendered as a game card
   render() {
     this.checkForRedirect()
     const gameList = this.props.games.map(game => (
@@ -33,6 +38,7 @@ class Games extends Component {
   }
 }
 
+// Redux is used to fetch all of the games
 function mapState(state) {
   return {
     games: state.games.games

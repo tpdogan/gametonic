@@ -4,9 +4,10 @@ import { resetBoard } from '../actions/play_actions'
 import { createUser, fetchUsers, newUser } from '../actions/user_actions'
 
 class UserForm extends Component {
+  // Constructor and onChange, onSubmit function
   constructor(props) {
     super(props)
-
+    // State is used for input event listener
     this.state = {
       username: ''
     }
@@ -15,6 +16,7 @@ class UserForm extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
+  // On every input update the username in the state
   onChange(event) {
     this.setState(
       {
@@ -23,6 +25,7 @@ class UserForm extends Component {
     )
   }
 
+  // Submit proper data at click
   onSubmit(event) {
     event.preventDefault()
 
@@ -40,12 +43,14 @@ class UserForm extends Component {
     this.props.createUser(userData)
     this.props.resetBoard(this.props.gamePath)
 
+    // Update the users table 1s of after submission
     // This part should/could be improved with action cable
     setTimeout(() => {
       this.props.fetchUsers(this.props.game)
     }, 1000);
   }
 
+  // Get an auth token for the form
   componentDidMount() {
     this.props.newUser()
   }
@@ -60,6 +65,7 @@ class UserForm extends Component {
   }
 }
 
+// Redux is used to save all necessary state elements
 function mapState(state) {
   return {
     game: state.games.game,

@@ -8,50 +8,42 @@ import Userform from './user_form'
 import hanger from '../vanilla/hanger'
 
 class Hangman extends Component {
+  // Constructor and checkWrongs, submitLetter functions
   constructor(props) {
     super(props)
     this.checkWrongs = this.checkWrongs.bind(this)
-    this.resetFront = this.resetFront.bind(this)
     this.submitLetter = this.submitLetter.bind(this)
   }
 
+  // Set game path to plural for rails
+  // Request a new game from rails index
   componentDidMount() {
     hanger()
     this.props.setGamePath('hangmen')
     this.props.resetBoard('hangmen')
   }
 
+  // For all wrong letters partially uncover the hangman
   checkWrongs() {
+    // Hide the cover at the back
     for (let i = 0; i < this.props.wrongs; i++) {
       const element = document.getElementById(`cover-${i}`)
       element.style.zIndex = -1
     }
 
+    // Emphasize the already selected letters
     this.props.letters.map(letter => {
       document.getElementById(`letter-${letter}`).classList.add('hangman__selected')
     })
   }
 
-  resetFront() {
-    setTimeout(() =>{
-      const letters = document.getElementsByClassName('hangman__letter')
-      for (let i = 0; i < letters.length; i++) {
-        const element = letters[i]
-        element.classList.remove('hangman__selected')
-      }
-
-      const covers = document.getElementsByClassName('hangman__cover')
-      for (let i = 0; i < covers.length; i++) {
-        const element = covers[i]
-        element.style.zIndex = 1
-      }
-    }, 100)
-  }
-
+  // Submit letter when clicked
   submitLetter(event) {
+    // Get the letter from the div id
     const id = event.target.id
     if (this.props.wrongs < 8 && this.props.winner != 1 && id.substr(0,7) === 'letter-') {
       const letter = id.substr(7)
+      // If letter is not selected already post a request
       if (!this.props.letters.includes(letter)) {
         const boardData = {
           authenticity_token: this.props.authenticity_token,
@@ -68,14 +60,17 @@ class Hangman extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Hangman')
+    // Check points at each render for winning situation
     this.props.setPoints(this.props.points)
 
+    // Game board only has the word
     const gameBoard = this.props.board.map((letter, index) => {
       return (
         <div key={index} className='hangman__letter'>{letter.toUpperCase()}</div>
       )
     })
 
+    // Alphabet is arranged and updated as selected from the rails response
     const alphabet =
       'abcdefghijklmnopqrstuvwxyz'.split('').map(letter => {
         return (
@@ -89,6 +84,8 @@ class Hangman extends Component {
         )
       })
 
+    // The cover are the curtains in front of hangman
+    // They are removed partially at each render
     const cover = '01234567'.split('').map(i => {
       return (
         <div
@@ -104,6 +101,7 @@ class Hangman extends Component {
       )
     })
 
+    // Depending on the winner status the result differs to show the points and the user form to save username
     const winner = this.props.winner
     const result = winner === -1 ? <div className='game__status'>You have lost!</div> :
                    winner === 1 ? <div className='game__status'>You have won {this.props.points} point(s)!<Userform /></div> : ''
@@ -131,6 +129,7 @@ class Hangman extends Component {
   }
 }
 
+// Redux is used to save all necessary state elements
 function mapState(state) {
   return {
     authenticity_token: state.hangman.authenticity_token,

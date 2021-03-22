@@ -9,7 +9,7 @@ module MemorycardsHelper
       2.times do
         # Add all positions that have not been used to the pos array
         pos = []
-        board.each_with_index{|value,index| pos.push(index) if value == 0}
+        board.each_with_index{|value,index| pos.push(index) if value === 0}
         # Select a random position from available pos array
         index = rand(pos.length)
         # Add new shape to the board / image starts from 0
@@ -71,10 +71,10 @@ module MemorycardsHelper
     end
 
     # Open a new tile as the other 2 are closed
-    state[:board][show.to_i] = show.to_i == -1 ? '?' : images()[board[show.to_i].to_i - 1]
+    state[:board][show.to_i] = show.to_i === -1 ? '?' : images()[board[show.to_i].to_i - 1]
 
     # Check is all tiles are opened and calculate points
-    if state[:board].count('?') == 0
+    if state[:board].count('?') === 0
       state[:winner] = 1
       state[:points] = 40 - mc.clicks
     end

@@ -7,19 +7,24 @@ import Users from './users'
 import Userform from './user_form'
 
 class Memorycard extends Component {
+  // Constructor and selectCell function
   constructor(props) {
     super(props)
     this.selectCell = this.selectCell.bind(this)
   }
 
+  // Set game path to plural for rails
+  // Request a new game from rails index
   componentDidMount() {
     this.props.setGamePath('memorycards')
     this.props.resetBoard('memorycards')
   }
 
+  // Submit cell if it has not been opened
   selectCell(event) {
+    // Get the cell id and check if the game has finished
     const id = event.target.id
-    if (this.props.winner == 0) {
+    if (this.props.winner === 0) {
       const boardData = {
         authenticity_token: this.props.authenticity_token,
         id: this.props.id,
@@ -37,8 +42,10 @@ class Memorycard extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Memory Card')
+    // Check points at each render for winning situation
     this.props.setPoints(this.props.points)
     
+    // Game board only has the tiles with shapes or ?
     const gameBoard = this.props.board.map((cell, index) => {
       return (
         <div key={index} className='memorycard__cell' id={index} onClick={this.selectCell}>
@@ -47,6 +54,7 @@ class Memorycard extends Component {
       )
     })
     
+    // Depending on the winner status the result differs to show the points and the user form to save username
     const result = this.props.winner == 1 ? 
       <div className='game__status'>
         <p>You have won</p>
@@ -76,6 +84,7 @@ class Memorycard extends Component {
   }
 }
 
+// Redux is used to save all necessary state elements
 function mapState(state) {
   return {
     authenticity_token: state.memorycard.authenticity_token,

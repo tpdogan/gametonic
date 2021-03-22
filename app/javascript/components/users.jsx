@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchUsers } from '../actions/user_actions'
 
 class Users extends Component {
+  // Fetch all users for a given game
   componentDidMount() {
     this.props.fetchUsers(this.props.game)
   }
@@ -27,6 +28,7 @@ class Users extends Component {
   }
 }
 
+// Redux is used to save all necessary state elements
 function mapState(state) {
   return {
     game: state.games.game,

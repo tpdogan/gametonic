@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { changeBoard, resetBoard, submitBoard } from '../actions/play_actions'
+import { resetBoard, submitBoard } from '../actions/play_actions'
 import { setGame, setGamePath, setPoints } from '../actions/game_actions'
 import Users from './users'
 import Userform from './user_form'
 
 class TicTacToe extends Component {
+  // Constructor and selectCell function
   constructor(props) {
     super(props)
     this.selectCell = this.selectCell.bind(this)
   }
 
+  // Set game path to plural for rails
+  // Request a new game from rails index
   componentDidMount() {
     this.props.setGamePath('tictactoes')
     this.props.resetBoard('tictactoes')
   }
 
+  // Submit cell if it has not been opened
   selectCell(event) {
+    // Get the cell id and check if the game has finished
     const cellNo = event.target.id
     if (this.props.board[cellNo] === '0' && this.props.winner === 0) {
       const board = 
@@ -26,7 +31,6 @@ class TicTacToe extends Component {
             return index === cellNo ? '-1' : item
           }
         )
-      this.props.changeBoard(board)
 
       const boardData = {
         authenticity_token: this.props.authenticity_token,
@@ -44,8 +48,10 @@ class TicTacToe extends Component {
   render() {
     // Game name must be the same as in the server
     this.props.setGame('Tic Tac Toe')
+    // Check points at each render for winning situation
     this.props.setPoints(this.props.points)
     
+    // Game board only has the tiles with XO
     const gameBoard = this.props.board.map((cell, index) => {
       return (
         <div key={index} className='tictactoe__cell' id={index} onClick={this.selectCell}>
@@ -60,6 +66,7 @@ class TicTacToe extends Component {
       )
     })
 
+    // Depending on the winner status the result differs to show the points and the user form to save username
     const result =
       this.props.winner === -1 ?
         <div className='game__status'>
@@ -92,6 +99,7 @@ class TicTacToe extends Component {
   }
 }
 
+// Redux is used to save all necessary state elements
 function mapState(state) {
   return {
     authenticity_token: state.tictactoe.authenticity_token,
@@ -106,4 +114,4 @@ function mapState(state) {
   }
 }
 
-export default connect(mapState, { changeBoard, resetBoard, setGame, setGamePath, setPoints, submitBoard })(TicTacToe)
+export default connect(mapState, { resetBoard, setGame, setGamePath, setPoints, submitBoard })(TicTacToe)

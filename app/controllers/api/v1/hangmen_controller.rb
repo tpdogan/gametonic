@@ -35,7 +35,13 @@ module API
         hm = Hangman.find(params[:id])
 
         # Concatenate the new letter and update the game
-        hm.update(:letters => (hm.letters + hangman_params[:letter]))
+        # It is best to check if letter is single char / in case of hacks
+        letter = hangman_params[:letter].strip
+        if letter.length === 1
+          hm.update(:letters => (hm.letters + hangman_params[:letter]))
+        else
+          return false
+        end
         
         # Save the game and get the current status
         if hm.save

@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_03_19_104401) do
   create_table "memorycards", force: :cascade do |t|
     t.string "board", default: "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
     t.string "open", default: "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+    t.integer "clicks", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

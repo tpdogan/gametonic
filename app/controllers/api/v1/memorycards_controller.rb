@@ -26,7 +26,7 @@ module API
         mc = Memorycard.find(params[:id])
 
         state = gameStatus(mc, memorycard_params[:index])
-        mc.update(:open => state[:board].map { |img| img == '?' ? 0 : 1 }.join(','))
+        mc.update(:open => state[:board].map { |img| img == '?' ? 0 : 1 }.join(','), :clicks => (mc.clicks + 1))
         
         if mc.save
 

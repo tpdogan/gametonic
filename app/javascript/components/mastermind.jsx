@@ -115,8 +115,8 @@ class Mastermind extends Component {
       <div className='game__status'>You have lost!</div>
 
     return (
-      <div className='section is-flex is-full-width is-justify-content-space-around'>
-        <div className="block m-0">
+      <div className='section is-flex is-flex-wrap-wrap is-full-width is-justify-content-space-around'>
+        <div className="block m-0 mb-4">
           <div className='mastermind__plate'>
             {gameBoard}
             {(this.props.winner || this.props.status.round == null) && result}

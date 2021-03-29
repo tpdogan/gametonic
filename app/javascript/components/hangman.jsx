@@ -107,8 +107,8 @@ class Hangman extends Component {
                    winner === 1 ? <div className='game__status'>You have won {this.props.points} point(s)!<Userform /></div> : ''
 
     return (
-      <div className='section is-flex is-full-width is-justify-content-space-around'>
-        <div className='block m-0'>
+      <div className='section is-flex is-flex-wrap-wrap is-full-width is-justify-content-space-around'>
+        <div className='block m-0 mb-4'>
           <div className='hangman__plate'>
             <div className='hangman__cell'>{gameBoard}</div>
             {this.props.winner != 0 && result}

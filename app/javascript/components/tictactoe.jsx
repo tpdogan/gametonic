@@ -79,8 +79,8 @@ class TicTacToe extends Component {
         <div className='game__status'>It is draw!</div>
 
     return (
-      <div className='section is-flex is-full-width is-justify-content-space-around'>
-        <div className='block m-0'>
+      <div className='section is-flex is-flex-wrap-wrap is-full-width is-justify-content-space-around'>
+        <div className='block m-0 mb-4'>
           <div className='tictactoe__plate'>
             {gameBoard}
             {this.props.perform != 'play' && <div className='game__status'>{result}</div>}

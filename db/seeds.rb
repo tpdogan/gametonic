@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Each games is seeded
-Game.create(:name => 'Tic Tac Toe', :image => 'assets/xox.jpg')
-Game.create(:name => 'Mastermind', :image => 'assets/mastermind.jpg')
-Game.create(:name => 'Hangman', :image => 'assets/hangman.jpg')
-Game.create(:name => 'Memory Card', :image => 'assets/memory.jpg')
+Game.create(:name => 'Tic Tac Toe', :image => 'https://res.cloudinary.com/dan7xvmnt/image/upload/v1617015760/gametonic/xox_bawxa5.jpg')
+Game.create(:name => 'Mastermind', :image => 'https://res.cloudinary.com/dan7xvmnt/image/upload/v1617015760/gametonic/mastermind_nhlxwm.jpg')
+Game.create(:name => 'Hangman', :image => 'https://res.cloudinary.com/dan7xvmnt/image/upload/v1617015760/gametonic/hangman_lp2kld.jpg')
+Game.create(:name => 'Memory Card', :image => 'https://res.cloudinary.com/dan7xvmnt/image/upload/v1617015760/gametonic/memory_lyqv4r.jpg')
